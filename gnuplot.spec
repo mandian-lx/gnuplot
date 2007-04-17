@@ -1,6 +1,6 @@
 %define	name	gnuplot
-%define	version 4.0.0
-%define release	%mkrel 11
+%define	version 4.2.0
+%define release	%mkrel 1
 %define	modeversion 0.6.0
 
 Name:		%{name}
@@ -13,9 +13,7 @@ Source2:	ftp://ftp.gnuplot.info/pub/gnuplot/faq/gnuplot-faq.html.bz2
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
-Patch0:		gnuplot-tetex30.patch
-Patch1:		gnuplot-4.0.0-emacs-mode--disable-f9.patch
-Patch2:		gnuplot-4.0.0-x11segv.patch
+Patch0:		gnuplot-4.0.0-emacs-mode--disable-f9.patch
 License:	Freeware-like
 Group:		Sciences/Other
 URL:		http://www.gnuplot.info/
@@ -29,6 +27,7 @@ BuildRequires:	png-devel
 BuildRequires:	readline-devel
 BuildRequires:	tetex-latex
 BuildRequires:  texinfo
+BuildRequires:  gd-devel
 
 %description
 Gnuplot is a command-line driven, interactive function plotting program
@@ -41,9 +40,7 @@ representation.
 
 %prep
 %setup -q -a 1
-%patch0 -p1 -b .tetex30
-%patch1 -p1
-%patch2 -p1
+%patch0 -p1
 
 perl -pi -e 's|(^\s*)mkinstalldirs\s|$1./mkinstalldirs |' gnuplot-mode.%{modeversion}/Makefile.in
 # Non-free stuff. Ouch. -- Geoff
@@ -141,6 +138,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
+%{_libdir}/X11/app-defaults/Gnuplot.app-defaults
+%{_datadir}/texmf/tex/latex/gnuplot/gnuplot.cfg
 
 
 
