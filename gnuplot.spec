@@ -18,8 +18,8 @@ License:	Freeware-like
 Group:		Sciences/Other
 URL:		http://www.gnuplot.info/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Requires(post):		/sbin/install-info
-Requires(preun):		/sbin/install-info
+Requires(post):		info-install
+Requires(preun):		info-install
 BuildRequires:	XFree86-devel
 BuildRequires:	emacs-bin
 BuildRequires:	ncurses-devel
