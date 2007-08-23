@@ -1,6 +1,6 @@
 %define	name	gnuplot
 %define	version 4.2.0
-%define release	%mkrel 1
+%define release	%mkrel 2
 %define	modeversion 0.6.0
 
 Name:		%{name}
@@ -114,9 +114,11 @@ install -m644 %{SOURCE13} -D $RPM_BUILD_ROOT/%{_liconsdir}/%{name}.png
 %{update_menus}
 %_install_info %{name}.info
 
+%preun
+%_remove_install_info %{name}.info
+
 %postun
 %{clean_menus}
-%_remove_install_info %{name}.info
 
 %clean
 rm -rf $RPM_BUILD_ROOT
