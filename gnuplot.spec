@@ -102,7 +102,7 @@ Icon=%{name}
 Terminal=true
 Type=Application
 StartupNotify=true
-Categories=X-MandrivaLinux-MoreApplications-Sciences-Mathematics;Sciences
+Categories=X-MandrivaLinux-MoreApplications-Sciences-Mathematics;Sciences;
 EOF
 
 # icon
