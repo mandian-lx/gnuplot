@@ -1,13 +1,13 @@
 %define	name	gnuplot
-%define	version 4.2.0
-%define release	%mkrel 2
+%define	version 4.2.2
+%define release	%mkrel 1
 %define	modeversion 0.6.0
 
 Name:		%{name}
 Summary:	A program for plotting mathematical expressions and data
 Version:	%{version}
 Release:	%{release}
-Source0:	ftp://ftp.gnuplot.info/pub/gnuplot/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.gnuplot.info/pub/gnuplot/%{name}-%{version}.tar.gz
 Source1:	ftp://ftp.gnuplot.info/pub/gnuplot/gnuplot-mode.%{modeversion}.tar.bz2
 Source2:	ftp://ftp.gnuplot.info/pub/gnuplot/faq/gnuplot-faq.html.bz2
 Source11:	%{name}.16.png
@@ -126,7 +126,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %doc Copyright docs/psdoc docs/gnuplot.pdf gnuplot-faq.html
-%doc demo gnuplot-mode.%{modeversion}/gpelcard.pdf README README.1ST README.exp
+%doc demo gnuplot-mode.%{modeversion}/gpelcard.pdf README README.1ST
 %doc TODO FAQ NEWS PORTING
 %config(noreplace) %{_sysconfdir}/emacs/site-start.d/*.el
 %{_bindir}/gnuplot
