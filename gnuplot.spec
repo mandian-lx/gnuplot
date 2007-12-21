@@ -17,6 +17,7 @@ Patch0:		gnuplot-4.0.0-emacs-mode--disable-f9.patch
 License:	Freeware-like
 Group:		Sciences/Other
 URL:		http://www.gnuplot.info/
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires(post):		info-install
 Requires(preun):		info-install
 BuildRequires:	X11-devel
