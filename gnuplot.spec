@@ -79,18 +79,7 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/emacs/site-start.d
 install -m 644 dotemacs $RPM_BUILD_ROOT%{_sysconfdir}/emacs/site-start.d/%{name}.el
 
 # menu
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
 
-cat > $RPM_BUILD_ROOT%{_menudir}/%{name} << EOF
-?package(%{name}):\
-needs="text"\
-section="More Applications/Sciences/Mathematics"\
-title="Gnuplot"\
-longtitle="The famous function plotting program"\
-command="%_bindir/gnuplot"\
-icon="gnuplot.png" \
-xdg="true"
-EOF
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -134,7 +123,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/emacs/site-lisp/*
 %{_libdir}/gnuplot
 %{_datadir}/gnuplot
-%{_menudir}/%{name}
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_infodir}/*
 %{_miconsdir}/%{name}.png
