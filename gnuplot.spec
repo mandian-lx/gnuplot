@@ -1,6 +1,6 @@
 %define	name	gnuplot
-%define	version 4.2.2
-%define release	%mkrel 4
+%define	version 4.2.3
+%define release	%mkrel 1
 %define	modeversion 0.6.0
 
 Name:		%{name}
@@ -128,5 +128,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
-%{_libdir}/X11/app-defaults/Gnuplot.app-defaults
+%{_libdir}/X11/app-defaults/Gnuplot
 %{_datadir}/texmf/tex/latex/gnuplot/gnuplot.cfg
