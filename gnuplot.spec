@@ -1,6 +1,6 @@
 %define	name	gnuplot
-%define	version 4.2.3
-%define release	%mkrel 2
+%define	version 4.2.4
+%define release	%mkrel 1
 %define	modeversion 0.6.0
 
 Name:		%{name}
@@ -62,6 +62,8 @@ bzip2 -d gnuplot-faq.html.bz2
 cd docs
 make ps
 make pdf
+# Correct internal links, fixes bug #19547
+perl -i.orig -pe 's/faq.html/gnuplot-faq.html/g' gnuplot-faq.html
 
 %install
 rm -rf $RPM_BUILD_ROOT
