@@ -1,12 +1,15 @@
 %define	name	gnuplot
 %define	version 4.2.4
-%define release	%mkrel 1
+%define release	%mkrel 3
 %define	modeversion 0.6.0
 
 Name:		%{name}
 Summary:	A program for plotting mathematical expressions and data
 Version:	%{version}
 Release:	%{release}
+License:	Freeware-like
+Group:		Sciences/Other
+URL:		http://www.gnuplot.info/
 Source0:	ftp://ftp.gnuplot.info/pub/gnuplot/%{name}-%{version}.tar.gz
 Source1:	ftp://ftp.gnuplot.info/pub/gnuplot/gnuplot-mode.%{modeversion}.tar.bz2
 Source2:	ftp://ftp.gnuplot.info/pub/gnuplot/faq/gnuplot-faq.html.bz2
@@ -14,10 +17,7 @@ Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
 Patch0:		gnuplot-4.0.0-emacs-mode--disable-f9.patch
-License:	Freeware-like
-Group:		Sciences/Other
-URL:		http://www.gnuplot.info/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Patch1:		gnuplot-4.2.4-fix-format-errors.patch
 Requires(post):		info-install
 Requires(preun):		info-install
 BuildRequires:	X11-devel
@@ -28,6 +28,7 @@ BuildRequires:	readline-devel
 BuildRequires:	tetex-latex
 BuildRequires:  texinfo
 BuildRequires:  gd-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Gnuplot is a command-line driven, interactive function plotting program
@@ -41,6 +42,7 @@ representation.
 %prep
 %setup -q -a 1
 %patch0 -p1
+%patch1 -p1
 
 perl -pi -e 's|(^\s*)mkinstalldirs\s|$1./mkinstalldirs |' gnuplot-mode.%{modeversion}/Makefile.in
 # Non-free stuff. Ouch. -- Geoff
@@ -48,7 +50,7 @@ rm -f demo/prob.dem demo/prob2.dem
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS -fno-fast-math"
-%configure --with-readline=gnu --with-png --without-linux-vga
+%configure2_5x --with-readline=gnu --with-png --without-linux-vga
 %make
 
 pushd gnuplot-mode.%{modeversion} && {
