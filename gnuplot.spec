@@ -1,6 +1,6 @@
 %define	name	gnuplot
-%define	version 4.2.4
-%define release	%mkrel 3
+%define	version 4.2.5
+%define release	%mkrel 1
 %define	modeversion 0.6.0
 
 Name:		%{name}
