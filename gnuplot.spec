@@ -1,5 +1,5 @@
 %define	name	gnuplot
-%define	version 4.2.5
+%define	version 4.2.6
 %define release	%mkrel 1
 %define	modeversion 0.6.0
 
@@ -10,7 +10,7 @@ Release:	%{release}
 License:	Freeware-like
 Group:		Sciences/Other
 URL:		http://www.gnuplot.info/
-Source0:	ftp://ftp.gnuplot.info/pub/gnuplot/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/project/gnuplot/%{name}/%{version}/%{name}-%{version}.tar.gz
 Source1:	ftp://ftp.gnuplot.info/pub/gnuplot/gnuplot-mode.%{modeversion}.tar.bz2
 Source2:	ftp://ftp.gnuplot.info/pub/gnuplot/faq/gnuplot-faq.html.bz2
 Source11:	%{name}.16.png
