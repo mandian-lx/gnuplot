@@ -1,6 +1,6 @@
 %define	name	gnuplot
-%define	version 4.2.6
-%define release	%mkrel 2
+%define	version 4.4.0
+%define release	%mkrel 1
 %define	modeversion 0.6.0
 
 Name:		%{name}
@@ -11,7 +11,7 @@ License:	Freeware-like
 Group:		Sciences/Other
 URL:		http://www.gnuplot.info/
 Source0:	http://downloads.sourceforge.net/project/gnuplot/%{name}/%{version}/%{name}-%{version}.tar.gz
-Source1:	ftp://ftp.gnuplot.info/pub/gnuplot/gnuplot-mode.%{modeversion}.tar.bz2
+Source1:	http://cars9.uchicago.edu/~ravel/software/gnuplot-mode/gnuplot-mode.%{modeversion}.tar.bz2
 Source2:	ftp://ftp.gnuplot.info/pub/gnuplot/faq/gnuplot-faq.html.bz2
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
@@ -124,7 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc Copyright docs/psdoc docs/gnuplot.pdf gnuplot-faq.html
 %doc demo gnuplot-mode.%{modeversion}/gpelcard.pdf README README.1ST
-%doc TODO FAQ NEWS PORTING
+%doc TODO NEWS PORTING
 %config(noreplace) %{_sysconfdir}/emacs/site-start.d/*.el
 %{_bindir}/gnuplot
 %{_mandir}/*/*
@@ -136,5 +136,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
-%{_libdir}/X11/app-defaults/Gnuplot
-%{_datadir}/texmf/tex/latex/gnuplot/gnuplot.cfg
+%{_datadir}/texmf/tex/latex/gnuplot
