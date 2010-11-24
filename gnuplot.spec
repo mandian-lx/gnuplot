@@ -1,5 +1,5 @@
 %define	name	gnuplot
-%define	version 4.4.0
+%define	version 4.4.2
 %define release	%mkrel 1
 %define	modeversion 0.6.0
 
@@ -12,7 +12,7 @@ Group:		Sciences/Other
 URL:		http://www.gnuplot.info/
 Source0:	http://downloads.sourceforge.net/project/gnuplot/%{name}/%{version}/%{name}-%{version}.tar.gz
 Source1:	http://cars9.uchicago.edu/~ravel/software/gnuplot-mode/gnuplot-mode.%{modeversion}.tar.bz2
-Source2:	ftp://ftp.gnuplot.info/pub/gnuplot/faq/gnuplot-faq.html.bz2
+Source2:	http://www.gnuplot.info/faq/faq.html
 Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
@@ -58,14 +58,13 @@ pushd gnuplot-mode.%{modeversion} && {
     %make
 } && popd
 
-cp %{SOURCE2} .
-bzip2 -d gnuplot-faq.html.bz2
-
 cd docs
 make ps
 make pdf
-# Correct internal links, fixes bug #19547
-perl -i.orig -pe 's/faq.html/gnuplot-faq.html/g' gnuplot-faq.html
+cd ..
+
+cp -f %SOURCE2 .
+chmod 644 faq.html
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -83,7 +82,6 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/emacs/site-start.d
 install -m 644 dotemacs $RPM_BUILD_ROOT%{_sysconfdir}/emacs/site-start.d/%{name}.el
 
 # menu
-
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -122,7 +120,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc Copyright docs/psdoc docs/gnuplot.pdf gnuplot-faq.html
+%doc Copyright docs/psdoc docs/gnuplot.pdf faq.html
 %doc demo gnuplot-mode.%{modeversion}/gpelcard.pdf README README.1ST
 %doc TODO NEWS PORTING
 %config(noreplace) %{_sysconfdir}/emacs/site-start.d/*.el
@@ -137,3 +135,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
 %{_datadir}/texmf/tex/latex/gnuplot
+
