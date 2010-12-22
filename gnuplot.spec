@@ -1,6 +1,6 @@
 %define	name	gnuplot
 %define	version 4.4.2
-%define release	%mkrel 1
+%define release	%mkrel 2
 %define	modeversion 0.6.0
 
 Name:		%{name}
@@ -20,7 +20,7 @@ Patch0:		gnuplot-4.0.0-emacs-mode--disable-f9.patch
 Patch1:		gnuplot-4.2.4-fix-format-errors.patch
 Requires(post):		info-install
 Requires(preun):		info-install
-BuildRequires:	X11-devel
+BuildRequires:	libx11-devel
 BuildRequires:	emacs-bin
 BuildRequires:	ncurses-devel
 BuildRequires:	png-devel
@@ -93,7 +93,7 @@ Icon=%{name}
 Terminal=true
 Type=Application
 StartupNotify=true
-Categories=X-MandrivaLinux-MoreApplications-Sciences-Mathematics;Sciences;
+Categories=Sciences;
 EOF
 
 # icon
