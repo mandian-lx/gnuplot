@@ -1,6 +1,6 @@
 %define	name	gnuplot
 %define	version 4.4.2
-%define release	%mkrel 2
+%define release	%mkrel 3
 %define	modeversion 0.6.0
 
 Name:		%{name}
@@ -28,6 +28,7 @@ BuildRequires:	readline-devel
 BuildRequires:	tetex-latex
 BuildRequires:  texinfo
 BuildRequires:  gd-devel
+BuildRequires:  cairo-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
