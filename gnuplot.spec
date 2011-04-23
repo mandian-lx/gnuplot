@@ -1,6 +1,6 @@
 %define	name	gnuplot
-%define	version 4.4.2
-%define release	%mkrel 3
+%define	version 4.4.3
+%define release	%mkrel 1
 %define	modeversion 0.6.0
 
 Name:		%{name}
@@ -18,8 +18,7 @@ Source12:	%{name}.32.png
 Source13:	%{name}.48.png
 Patch0:		gnuplot-4.0.0-emacs-mode--disable-f9.patch
 Patch1:		gnuplot-4.2.4-fix-format-errors.patch
-Requires(post):		info-install
-Requires(preun):		info-install
+Requires(preun): info-install
 BuildRequires:	libx11-devel
 BuildRequires:	emacs-bin
 BuildRequires:	ncurses-devel
@@ -29,6 +28,8 @@ BuildRequires:	tetex-latex
 BuildRequires:  texinfo
 BuildRequires:  gd-devel
 BuildRequires:  cairo-devel
+BuildRequires:	lua-devel
+BuildRequires:	wxgtku2.8-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
