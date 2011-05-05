@@ -1,12 +1,9 @@
-%define	name	gnuplot
-%define	version 4.4.3
-%define release	%mkrel 2
 %define	modeversion 0.6.0
 
-Name:		%{name}
+Name:		gnuplot
 Summary:	A program for plotting mathematical expressions and data
-Version:	%{version}
-Release:	%{release}
+Version:	4.4.3
+Release:	3
 License:	Freeware-like
 Group:		Sciences/Other
 URL:		http://www.gnuplot.info/
@@ -47,6 +44,7 @@ representation.
 %package nox
 Summary:	A program for plotting mathematical expressions and data
 Group:		Sciences/Other
+Conflicts:	gnuplot < 4.4.3
 
 %description nox
 Gnuplot is a command-line driven, interactive function plotting program
@@ -62,6 +60,7 @@ This package provides GNUPlot without any X dependency.
 %package mode
 Summary:	Yet another Gnuplot mode for Emacs
 Group:		Sciences/Other
+Conflicts:	gnuplot < 4.4.3
 
 %description mode
 Gnuplot is a major mode for Emacs flavours with the following features:
@@ -79,6 +78,7 @@ Gnuplot is a major mode for Emacs flavours with the following features:
 %package doc
 Summary:	GNUPlot Documentation
 Group:		Sciences/Other
+Conflicts:	gnuplot < 4.4.3
 
 %description doc
 Gnuplot is a command-line driven, interactive function plotting program
