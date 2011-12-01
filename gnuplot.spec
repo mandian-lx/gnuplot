@@ -127,7 +127,7 @@ cp -f %SOURCE2 .
 chmod 644 faq.html
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 pushd build-nox
 %{makeinstall_std}
@@ -139,10 +139,10 @@ pushd build-x11
 popd
 
 pushd gnuplot-mode.%{modeversion} && {
-    make install prefix=$RPM_BUILD_ROOT/usr
+    make install prefix=%{buildroot}/usr
     pdflatex gpelcard
-    install -d $RPM_BUILD_ROOT%{_sysconfdir}/emacs/site-start.d
-    install -m 644 dotemacs $RPM_BUILD_ROOT%{_sysconfdir}/emacs/site-start.d/%{name}.el
+    install -d %{buildroot}%{_sysconfdir}/emacs/site-start.d
+    install -m 644 dotemacs %{buildroot}%{_sysconfdir}/emacs/site-start.d/%{name}.el
 } && popd
 
 # Copy back from build dir to be able to package those files
@@ -154,8 +154,8 @@ popd
 
 # menu
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=Gnuplot
 Comment=The famous function plotting program
@@ -168,9 +168,9 @@ Categories=Sciences;
 EOF
 
 # icon
-install -m644 %{SOURCE11} -D $RPM_BUILD_ROOT/%{_miconsdir}/%{name}.png
-install -m644 %{SOURCE12} -D $RPM_BUILD_ROOT/%{_iconsdir}/%{name}.png
-install -m644 %{SOURCE13} -D $RPM_BUILD_ROOT/%{_liconsdir}/%{name}.png
+install -m644 %{SOURCE11} -D %{buildroot}/%{_miconsdir}/%{name}.png
+install -m644 %{SOURCE12} -D %{buildroot}/%{_iconsdir}/%{name}.png
+install -m644 %{SOURCE13} -D %{buildroot}/%{_liconsdir}/%{name}.png
 
 %post
 %if %mdkversion < 200900
@@ -187,7 +187,7 @@ install -m644 %{SOURCE13} -D $RPM_BUILD_ROOT/%{_liconsdir}/%{name}.png
 %endif
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
