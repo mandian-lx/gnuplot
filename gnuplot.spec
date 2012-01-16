@@ -30,6 +30,7 @@ BuildRequires:  gd-devel
 BuildRequires:  cairo-devel
 BuildRequires:	lua-devel
 BuildRequires:	wxgtku2.8-devel
+BuildRequires:	texlive-epstopdf
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -108,7 +109,7 @@ mkdir build-nox
 pushd build-nox
 %configure2_5x --with-readline=gnu --with-png --without-linux-vga --without-x --disable-wxwidgets
 %make -C src/
-%make -C docs/ ps
+#%make -C docs/ ps
 %make -C docs/ pdf
 popd
 
@@ -148,8 +149,8 @@ pushd gnuplot-mode.%{modeversion} && {
 # Copy back from build dir to be able to package those files
 pushd build-nox
 %__mv docs/gnuplot.pdf ../docs/
-%__mv docs/gnuplot.ps ../docs/
-%__mv docs/gpcard.ps ../docs/
+#%__mv docs/gnuplot.ps ../docs/
+#%__mv docs/gpcard.ps ../docs/
 popd
 
 # menu
@@ -209,7 +210,7 @@ rm -rf %{buildroot}
 
 %files doc
 %defattr(-,root,root)
-%doc demo docs/psdoc docs/gnuplot.pdf
+%doc demo docs/gnuplot.pdf
 %{_datadir}/gnuplot
 %{_infodir}/*
 
