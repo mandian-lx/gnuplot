@@ -3,7 +3,7 @@
 Name:		gnuplot
 Summary:	A program for plotting mathematical expressions and data
 Version:	4.4.4
-Release:	1
+Release:	2
 License:	Freeware-like
 Group:		Sciences/Other
 URL:		http://www.gnuplot.info/
@@ -18,7 +18,6 @@ Patch1:		gnuplot-4.2.4-fix-format-errors.patch
 Requires:	gnuplot-nox
 Suggests:	gnuplot-mode
 Suggests:	gnuplot-doc
-Requires(preun): info-install
 BuildRequires:	libx11-devel
 BuildRequires:	emacs-bin
 BuildRequires:	ncurses-devel
@@ -31,7 +30,6 @@ BuildRequires:  cairo-devel
 BuildRequires:	lua-devel
 BuildRequires:	wxgtku2.8-devel
 BuildRequires:	texlive-epstopdf
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Gnuplot is a command-line driven, interactive function plotting program
@@ -42,12 +40,12 @@ different formats.
 Install gnuplot if you need a graphics package for scientific data
 representation.
 
-%package nox
+%package	nox
 Summary:	A program for plotting mathematical expressions and data
 Group:		Sciences/Other
 Conflicts:	gnuplot < 4.4.3
 
-%description nox
+%description	nox
 Gnuplot is a command-line driven, interactive function plotting program
 especially suited for scientific data representation. Gnuplot can be used to
 plot functions and data points in both two and three dimensions and in many
@@ -58,12 +56,12 @@ representation.
 
 This package provides GNUPlot without any X dependency.
 
-%package mode
+%package	mode
 Summary:	Yet another Gnuplot mode for Emacs
 Group:		Sciences/Other
 Conflicts:	gnuplot < 4.4.3
 
-%description mode
+%description	mode
 Gnuplot is a major mode for Emacs flavours with the following features:
 
  - Functions for plotting lines, regions, entire scripts, or entire files
@@ -76,12 +74,12 @@ Gnuplot is a major mode for Emacs flavours with the following features:
  - Pull-down menus plus a toolbar in XEmacs
  - Distributed with a quick reference sheet in postscript.
 
-%package doc
+%package	doc
 Summary:	GNUPlot Documentation
 Group:		Sciences/Other
 Conflicts:	gnuplot < 4.4.3
 
-%description doc
+%description	doc
 Gnuplot is a command-line driven, interactive function plotting program
 especially suited for scientific data representation. Gnuplot can be used to
 plot functions and data points in both two and three dimensions and in many
@@ -128,15 +126,13 @@ cp -f %SOURCE2 .
 chmod 644 faq.html
 
 %install
-rm -rf %{buildroot}
-
 pushd build-nox
-%{makeinstall_std}
-%__mv %{buildroot}/%{_bindir}/gnuplot %{buildroot}/%{_bindir}/gnuplot-nox
+%makeinstall_std
+%__mv %{buildroot}%{_bindir}/gnuplot %{buildroot}%{_bindir}/gnuplot-nox
 popd
 
 pushd build-x11
-%{makeinstall_std}
+%makeinstall_std
 popd
 
 pushd gnuplot-mode.%{modeversion} && {
@@ -169,33 +165,14 @@ Categories=Sciences;
 EOF
 
 # icon
-install -m644 %{SOURCE11} -D %{buildroot}/%{_miconsdir}/%{name}.png
-install -m644 %{SOURCE12} -D %{buildroot}/%{_iconsdir}/%{name}.png
-install -m644 %{SOURCE13} -D %{buildroot}/%{_liconsdir}/%{name}.png
-
-%post
-%if %mdkversion < 200900
-%{update_menus}
-%endif
-%_install_info %{name}.info
-
-%preun
-%_remove_install_info %{name}.info
-
-%if %mdkversion < 200900
-%postun
-%{clean_menus}
-%endif
-
-%clean
-rm -rf %{buildroot}
+install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{name}.png
+install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{name}.png
+install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 
 %files
-%defattr(-,root,root)
 %{_bindir}/gnuplot
 
 %files nox
-%defattr(-,root,root)
 %doc Copyright faq.html
 %doc README README.1ST
 %doc TODO NEWS PORTING
@@ -209,13 +186,11 @@ rm -rf %{buildroot}
 %{_datadir}/texmf/tex/latex/gnuplot
 
 %files doc
-%defattr(-,root,root)
 %doc demo docs/gnuplot.pdf
 %{_datadir}/gnuplot
 %{_infodir}/*
 
 %files mode
-%defattr(-,root,root)
 %doc gnuplot-mode.%{modeversion}/gpelcard.pdf
 %config(noreplace) %{_sysconfdir}/emacs/site-start.d/*.el
 %{_datadir}/emacs/site-lisp/*
