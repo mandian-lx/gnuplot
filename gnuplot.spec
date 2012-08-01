@@ -2,8 +2,8 @@
 
 Name:		gnuplot
 Summary:	A program for plotting mathematical expressions and data
-Version:	4.4.4
-Release:	2
+Version:	4.6.0
+Release:	1
 License:	Freeware-like
 Group:		Sciences/Other
 URL:		http://www.gnuplot.info/
@@ -14,7 +14,7 @@ Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
 Patch0:		gnuplot-4.0.0-emacs-mode--disable-f9.patch
-Patch1:		gnuplot-4.2.4-fix-format-errors.patch
+Patch1:		gnuplot-4.6.0-fix-format-errors.patch
 Requires:	gnuplot-nox
 Suggests:	gnuplot-mode
 Suggests:	gnuplot-doc
@@ -100,7 +100,7 @@ perl -pi -e 's|(^\s*)mkinstalldirs\s|$1./mkinstalldirs |' gnuplot-mode.%{modever
 rm -f demo/prob.dem demo/prob2.dem
 
 %build
-export CFLAGS="$RPM_OPT_FLAGS -fno-fast-math"
+export CFLAGS="%{optflags} -fno-fast-math"
 export CONFIGURE_TOP=..
 
 mkdir build-nox
@@ -154,14 +154,15 @@ popd
 mkdir -p %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
+Version=1.0
 Name=Gnuplot
 Comment=The famous function plotting program
-Exec=%{_bindir}/%{name}
+Exec=%{name}
 Icon=%{name}
 Terminal=true
 Type=Application
 StartupNotify=true
-Categories=Sciences;
+Categories=Education;Science;Math;DataVisualization;
 EOF
 
 # icon
