@@ -93,7 +93,7 @@ This package provides the additional documentation.
 %prep
 %setup -q -a 1
 %patch0 -p1
-%patch1 -p1
+#% patch1 -p1
 
 perl -pi -e 's|(^\s*)mkinstalldirs\s|$1./mkinstalldirs |' gnuplot-mode.%{modeversion}/Makefile.in
 # Non-free stuff. Ouch. -- Geoff
@@ -176,7 +176,7 @@ install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 %files nox
 %doc Copyright faq.html
 %doc README README.1ST
-%doc TODO NEWS PORTING
+%doc NEWS PORTING
 %{_bindir}/gnuplot-nox
 %{_mandir}/*/*
 %{_libdir}/gnuplot
