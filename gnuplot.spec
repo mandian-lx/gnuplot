@@ -15,6 +15,7 @@ Source12:	%{name}.32.png
 Source13:	%{name}.48.png
 Patch0:		gnuplot-4.0.0-emacs-mode--disable-f9.patch
 Patch1:		gnuplot-4.6.0-fix-format-errors.patch
+Patch2:		gnuplot-4.6.2-texinfo5.patch
 Requires:	gnuplot-nox
 Suggests:	gnuplot-mode
 Suggests:	gnuplot-doc
@@ -94,6 +95,7 @@ This package provides the additional documentation.
 %setup -q -a 1
 %patch0 -p1
 #% patch1 -p1
+%patch2 -p1
 
 perl -pi -e 's|(^\s*)mkinstalldirs\s|$1./mkinstalldirs |' gnuplot-mode.%{modeversion}/Makefile.in
 # Non-free stuff. Ouch. -- Geoff
