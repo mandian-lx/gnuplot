@@ -1,12 +1,12 @@
 %define	modeversion 0.6.0
 
-Name:		gnuplot
 Summary:	A program for plotting mathematical expressions and data
+Name:		gnuplot
 Version:	4.6.2
 Release:	1
 License:	Freeware-like
 Group:		Sciences/Other
-URL:		http://www.gnuplot.info/
+Url:		http://www.gnuplot.info/
 Source0:	http://downloads.sourceforge.net/project/gnuplot/%{name}/%{version}/%{name}-%{version}.tar.gz
 Source1:	http://cars9.uchicago.edu/~ravel/software/gnuplot-mode/gnuplot-mode.%{modeversion}.tar.bz2
 Source2:	http://www.gnuplot.info/faq/faq.html
@@ -14,23 +14,23 @@ Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
 Patch0:		gnuplot-4.0.0-emacs-mode--disable-f9.patch
-Patch1:		gnuplot-4.6.0-fix-format-errors.patch
 Patch2:		gnuplot-4.6.2-texinfo5.patch
+
+BuildRequires:	emacs-bin
+BuildRequires:  texinfo
+BuildRequires:	texlive-epstopdf
+BuildRequires:	tetex-latex
+BuildRequires:  gd-devel
+BuildRequires:	readline-devel
+BuildRequires:	wxgtku-devel
+BuildRequires:  pkgconfig(cairo)
+BuildRequires:	pkgconfig(libpng15)
+BuildRequires:	pkgconfig(lua)
+BuildRequires:	pkgconfig(ncurses)
+BuildRequires:	pkgconfig(x11)
 Requires:	gnuplot-nox
 Suggests:	gnuplot-mode
 Suggests:	gnuplot-doc
-BuildRequires:	libx11-devel
-BuildRequires:	emacs-bin
-BuildRequires:	ncurses-devel
-BuildRequires:	png-devel
-BuildRequires:	readline-devel
-BuildRequires:	tetex-latex
-BuildRequires:  texinfo
-BuildRequires:  gd-devel
-BuildRequires:  cairo-devel
-BuildRequires:	lua-devel
-BuildRequires:	wxgtku2.8-devel
-BuildRequires:	texlive-epstopdf
 
 %description
 Gnuplot is a command-line driven, interactive function plotting program
@@ -93,11 +93,9 @@ This package provides the additional documentation.
 
 %prep
 %setup -q -a 1
-%patch0 -p1
-#% patch1 -p1
-%patch2 -p1
+%apply_patches
 
-perl -pi -e 's|(^\s*)mkinstalldirs\s|$1./mkinstalldirs |' gnuplot-mode.%{modeversion}/Makefile.in
+sed -i -e 's|(^\s*)mkinstalldirs\s|$1./mkinstalldirs |' gnuplot-mode.%{modeversion}/Makefile.in
 # Non-free stuff. Ouch. -- Geoff
 rm -f demo/prob.dem demo/prob2.dem
 
@@ -107,15 +105,22 @@ export CONFIGURE_TOP=..
 
 mkdir build-nox
 pushd build-nox
-%configure2_5x --with-readline=gnu --with-png --without-linux-vga --without-x --disable-wxwidgets
+%configure2_5x \
+	--with-readline=gnu \
+	--with-png \
+	--without-linux-vga \
+	--without-x \
+	--disable-wxwidgets
 %make -C src/
-#%make -C docs/ ps
 %make -C docs/ pdf
 popd
 
 mkdir build-x11
 pushd build-x11
-%configure2_5x --with-readline=gnu --with-png --without-linux-vga
+%configure2_5x 
+	--with-readline=gnu 
+	--with-png 
+	--without-linux-vga
 %make
 popd
 
@@ -130,7 +135,7 @@ chmod 644 faq.html
 %install
 pushd build-nox
 %makeinstall_std
-%__mv %{buildroot}%{_bindir}/gnuplot %{buildroot}%{_bindir}/gnuplot-nox
+mv %{buildroot}%{_bindir}/gnuplot %{buildroot}%{_bindir}/gnuplot-nox
 popd
 
 pushd build-x11
@@ -146,9 +151,9 @@ pushd gnuplot-mode.%{modeversion} && {
 
 # Copy back from build dir to be able to package those files
 pushd build-nox
-%__mv docs/gnuplot.pdf ../docs/
-#%__mv docs/gnuplot.ps ../docs/
-#%__mv docs/gpcard.ps ../docs/
+mv docs/gnuplot.pdf ../docs/
+#mv docs/gnuplot.ps ../docs/
+#mv docs/gpcard.ps ../docs/
 popd
 
 # menu
@@ -183,10 +188,10 @@ install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 %{_mandir}/*/*
 %{_libdir}/gnuplot
 %{_datadir}/applications/mandriva-%{name}.desktop
+%{_datadir}/texmf/tex/latex/gnuplot
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
-%{_datadir}/texmf/tex/latex/gnuplot
 
 %files doc
 %doc demo docs/gnuplot.pdf
@@ -197,3 +202,4 @@ install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 %doc gnuplot-mode.%{modeversion}/gpelcard.pdf
 %config(noreplace) %{_sysconfdir}/emacs/site-start.d/*.el
 %{_datadir}/emacs/site-lisp/*
+
