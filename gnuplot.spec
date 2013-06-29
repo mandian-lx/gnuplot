@@ -117,9 +117,9 @@ popd
 
 mkdir build-x11
 pushd build-x11
-%configure2_5x 
-	--with-readline=gnu 
-	--with-png 
+%configure2_5x \
+	--with-readline=gnu \
+	--with-png \
 	--without-linux-vga
 %make
 popd
