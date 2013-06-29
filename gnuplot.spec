@@ -24,7 +24,7 @@ BuildRequires:  gd-devel
 BuildRequires:	readline-devel
 BuildRequires:	wxgtku-devel
 BuildRequires:  pkgconfig(cairo)
-BuildRequires:	pkgconfig(libpng15)
+BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(ncurses)
 BuildRequires:	pkgconfig(x11)
@@ -95,7 +95,7 @@ This package provides the additional documentation.
 %setup -q -a 1
 %apply_patches
 
-sed -i -e 's|(^\s*)mkinstalldirs\s|$1./mkinstalldirs |' gnuplot-mode.%{modeversion}/Makefile.in
+perl -pi -e 's|(^\s*)mkinstalldirs\s|$1./mkinstalldirs |' gnuplot-mode.%{modeversion}/Makefile.in
 # Non-free stuff. Ouch. -- Geoff
 rm -f demo/prob.dem demo/prob2.dem
 
