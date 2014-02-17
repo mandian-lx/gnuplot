@@ -186,7 +186,7 @@ install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 %doc NEWS PORTING
 %{_bindir}/gnuplot-nox
 %{_mandir}/*/*
-%{_libdir}/gnuplot
+%{_libdir}/gnuplot/4.6/gnuplot_v11
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_datadir}/texmf/tex/latex/gnuplot
 %{_miconsdir}/%{name}.png
