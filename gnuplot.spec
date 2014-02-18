@@ -2,8 +2,8 @@
 
 Summary:	A program for plotting mathematical expressions and data
 Name:		gnuplot
-Version:	4.6.2
-Release:	9
+Version:	4.6.4
+Release:	1
 License:	Freeware-like
 Group:		Sciences/Other
 Url:		http://www.gnuplot.info/
@@ -14,7 +14,6 @@ Source11:	%{name}.16.png
 Source12:	%{name}.32.png
 Source13:	%{name}.48.png
 Patch0:		gnuplot-4.0.0-emacs-mode--disable-f9.patch
-Patch2:		gnuplot-4.6.2-texinfo5.patch
 
 BuildRequires:	emacs-bin
 BuildRequires:  texinfo
@@ -186,7 +185,7 @@ install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 %doc NEWS PORTING
 %{_bindir}/gnuplot-nox
 %{_mandir}/*/*
-%{_libdir}/gnuplot/4.6/gnuplot_v11
+%{_libexecdir}/gnuplot/4.6/gnuplot_x11
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_datadir}/texmf/tex/latex/gnuplot
 %{_miconsdir}/%{name}.png
@@ -196,7 +195,6 @@ install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 %files doc
 %doc demo docs/gnuplot.pdf
 %{_datadir}/gnuplot
-%{_infodir}/*
 
 %files mode
 %doc gnuplot-mode.%{modeversion}/gpelcard.pdf

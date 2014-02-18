@@ -1,3 +1,3 @@
 sources:
-  "gnuplot-4.6.2.tar.gz": 88748d4bc9bd41ba8a267a35b6e5b7427cd997cd
-  "gnuplot-mode.0.6.0.tar.bz2": 19818c7e34332a435fd9cc8a3ffd15aeae41a312
+  gnuplot-mode.0.6.0.tar.bz2: 19818c7e34332a435fd9cc8a3ffd15aeae41a312
+  gnuplot-4.6.4.tar.gz: 54ee5ce9a0a2698b046064bd275e772673350013
