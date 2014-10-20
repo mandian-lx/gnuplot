@@ -2,8 +2,8 @@
 
 Summary:	A program for plotting mathematical expressions and data
 Name:		gnuplot
-Version:	4.6.4
-Release:	6
+Version:	4.6.6
+Release:	1
 License:	Freeware-like
 Group:		Sciences/Other
 Url:		http://www.gnuplot.info/
@@ -21,7 +21,7 @@ BuildRequires:	texlive-epstopdf
 BuildRequires:	tetex-latex
 BuildRequires:  gd-devel
 BuildRequires:	readline-devel
-BuildRequires:	wxgtku-devel
+BuildRequires:	qt4-devel
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(lua)
@@ -104,7 +104,7 @@ export CONFIGURE_TOP=..
 
 mkdir build-nox
 pushd build-nox
-%configure2_5x \
+%configure \
 	--with-readline=gnu \
 	--with-png \
 	--without-linux-vga \
@@ -116,10 +116,12 @@ popd
 
 mkdir build-x11
 pushd build-x11
-%configure2_5x \
+%configure \
 	--with-readline=gnu \
 	--with-png \
-	--without-linux-vga
+	--without-linux-vga \
+	--disable-wxwidgets \
+	--enable-qt
 %make
 popd
 
@@ -186,6 +188,7 @@ install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 %{_bindir}/gnuplot-nox
 %{_mandir}/*/*
 %{_libexecdir}/gnuplot/4.6/gnuplot_x11
+%{_libexecdir}/gnuplot/4.6/gnuplot_qt
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_datadir}/texmf/tex/latex/gnuplot
 %{_miconsdir}/%{name}.png
