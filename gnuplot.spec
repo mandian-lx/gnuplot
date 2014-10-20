@@ -19,6 +19,7 @@ BuildRequires:	emacs-bin
 BuildRequires:  texinfo
 BuildRequires:	texlive-epstopdf
 BuildRequires:	tetex-latex
+BuildRequires:	texlive-latex-bin
 BuildRequires:  gd-devel
 BuildRequires:	readline-devel
 BuildRequires:	qt4-devel
