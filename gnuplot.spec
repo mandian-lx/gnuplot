@@ -2,8 +2,8 @@
 
 Summary:	A program for plotting mathematical expressions and data
 Name:		gnuplot
-Version:	4.6.6
-Release:	3
+Version:	5.2.2
+Release:	1
 License:	Freeware-like
 Group:		Sciences/Other
 Url:		http://www.gnuplot.info/
@@ -19,10 +19,13 @@ BuildRequires:	emacs-bin
 BuildRequires:  texinfo
 BuildRequires:	texlive-epstopdf
 BuildRequires:	tetex-latex
+BuildRequires:	latex-picins
 BuildRequires:	texlive-latex-bin
 BuildRequires:  gd-devel
 BuildRequires:	readline-devel
-BuildRequires:	qt4-devel
+BuildRequires:	cmake(Qt5Core)
+BuildRequires:	cmake(Qt5Gui)
+BuildRequires:	cmake(Qt5Widgets)
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(lua)
@@ -110,9 +113,12 @@ pushd build-nox
 	--with-png \
 	--without-linux-vga \
 	--without-x \
-	--disable-wxwidgets
+	--disable-wxwidgets \
+	--disable-qt
 %make -C src/
-%make -C docs/ pdf
+# building docs with parallel make
+# fails on a 32-thread box
+make -C docs/ pdf
 popd
 
 mkdir build-x11
@@ -179,19 +185,26 @@ install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{name}.png
 install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{name}.png
 install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 
+cd %{buildroot}%{_datadir}
+mv texmf-local texmf-dist
+
+%post -p %{_bindir}/texhash
+
+%postun -p %{_bindir}/texhash
+
 %files
 %{_bindir}/gnuplot
+%{_datadir}/texmf-dist/tex/latex/gnuplot
+%{_libexecdir}/gnuplot/%(echo %{version}|cut -d. -f1-2)/gnuplot_x11
+%{_libexecdir}/gnuplot/%(echo %{version}|cut -d. -f1-2)/gnuplot_qt
 
 %files nox
 %doc Copyright faq.html
-%doc README README.1ST
-%doc NEWS PORTING
+%doc README
+%doc NEWS
 %{_bindir}/gnuplot-nox
 %{_mandir}/*/*
-%{_libexecdir}/gnuplot/4.6/gnuplot_x11
-%{_libexecdir}/gnuplot/4.6/gnuplot_qt
 %{_datadir}/applications/mandriva-%{name}.desktop
-%{_datadir}/texmf/tex/latex/gnuplot
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
