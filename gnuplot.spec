@@ -27,6 +27,9 @@ BuildRequires:  giflib-devel
 BuildRequires:	readline-devel
 BuildRequires:	cmake(Qt5Core)
 BuildRequires:	cmake(Qt5Gui)
+BuildRequires:	cmake(Qt5PrintSupport)
+BuildRequires:	cmake(Qt5Svg)
+BuildRequires:	cmake(Qt5Network)
 BuildRequires:	cmake(Qt5Widgets)
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:	pkgconfig(libpangocairo)
@@ -119,7 +122,7 @@ pushd build-nox
 	--without-linux-vga \
 	--without-x \
 	--disable-wxwidgets \
-	--disable-qt
+	--without-qt
 %make -C src/
 # building docs with parallel make
 # fails on a 32-thread box
@@ -133,7 +136,7 @@ pushd build-x11
 	--with-png \
 	--without-linux-vga \
 	--disable-wxwidgets \
-	--enable-qt
+	--with-qt
 %make
 popd
 
