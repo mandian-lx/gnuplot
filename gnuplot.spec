@@ -3,7 +3,7 @@
 Summary:	A program for plotting mathematical expressions and data
 Name:		gnuplot
 Version:	4.6.6
-Release:	3
+Release:	4
 License:	Freeware-like
 Group:		Sciences/Other
 Url:		http://www.gnuplot.info/
@@ -16,6 +16,7 @@ Source13:	%{name}.48.png
 Patch0:		gnuplot-4.0.0-emacs-mode--disable-f9.patch
 
 BuildRequires:	emacs-bin
+BuildRequires:	latex2html
 BuildRequires:  texinfo
 BuildRequires:	texlive-epstopdf
 BuildRequires:	tetex-latex
@@ -25,8 +26,10 @@ BuildRequires:	readline-devel
 BuildRequires:	qt4-devel
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:	pkgconfig(libpng)
+BuildRequires:	pkgconfig(libotf)
 BuildRequires:	pkgconfig(lua)
 BuildRequires:	pkgconfig(ncurses)
+BuildRequires:	pkgconfig(pangocairo)
 BuildRequires:	pkgconfig(x11)
 Requires:	gnuplot-nox
 Suggests:	gnuplot-mode
