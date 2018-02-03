@@ -19,7 +19,7 @@ BuildRequires:	emacs-bin
 BuildRequires:  texinfo
 BuildRequires:	texlive-epstopdf
 BuildRequires:	tetex-latex
-#BuildRequires:	latex-picins
+BuildRequires:	latex-picins
 BuildRequires:	latex2html
 BuildRequires:	texlive-latex-bin
 BuildRequires:  gd-devel
